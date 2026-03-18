@@ -9,12 +9,11 @@ def dependencies():
     except Exception as e:
         print(f"Error : {e}")
     
-#to install datasets
+#to install dataset
 def datasets():
-    #create folders for datasets
+    #create folders for dataset
     #exist_ok = True will ignore the error if the directory already exists, if not itll create a directory
     os.makedirs("data/ham10000", exist_ok = True)
-    os.makedirs("data/isic_2024", exist_ok = True)
     
     try:
         #HAM10000
@@ -27,20 +26,6 @@ def datasets():
                 "--unzip"
             ], check = True)
         print("Downloaded HAM10000 Successfully!")
-        
-        #ISIC 2024
-        print("\nDownloading ISIC 2024 Dataset... ")
-        if not os.listdir("data/isic_2024"):
-            subprocess.run([
-                "kaggle", "competitions", "download",
-                "-c", "isic-2024-challenge",
-                "-p", "data/isic_2024",
-            ], check = True)
-            #automatically unzips the file
-            with zipfile.ZipFile("data/isic_2024/isic-2024-challenge.zip", "r") as z:
-                z.extractall("data/isic_2024")
-            os.remove("data/isic_2024/isic-2024-challenge.zip")
-        print("Downloaded ISIC 2024 Successfully!")
         
     except Exception as e:
         print(f"Error : {e}")
