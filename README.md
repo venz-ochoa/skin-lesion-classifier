@@ -21,8 +21,5 @@ ROC-AUC and Sensitivity at fixed Specificity
 4. Run download_data.py and select what you want to download
 
 # Instructions
-1. Set-up
-    To download dependencies and datasets, run download_data.py
-    The user is given the option to download only dependencies, only datasets, or both
-    Both use Kaggle API to download datasets
-    Will take approx. 5-10 minutes of downloading time
+1.  To download dependencies and datasets, run download_data.py. The user is given the option to download only dependencies, only datasets, or both. Both use Kaggle API to download datasets
+    and will take approx. 5-10 minutes of downloading time
