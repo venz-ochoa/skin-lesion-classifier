@@ -12,6 +12,7 @@ def dependencies():
 #to install datasets
 def datasets():
     #create folders for datasets
+    #exist_ok = True will ignore the error if the directory already exists, if not itll create a directory
     os.makedirs("data/ham10000", exist_ok = True)
     os.makedirs("data/isic_2024", exist_ok = True)
     
