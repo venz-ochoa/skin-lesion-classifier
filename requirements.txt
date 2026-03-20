@@ -1,1 +1,23 @@
 #put all dependencies here
+#deep learning
+tensorflow>=2.16.1
+numpy>=1.26.4
+pandas>=2.2.0
+timm
+
+#image processing
+opencv-python-headless>=4.9.0
+Pillow>=10.2.0
+scipy>=1.12.0
+
+#explainability 
+tf-explain>=0.3.1
+scikit-image>=0.22.0
+
+#evaluation and visualization
+scikit-learn>=1.4.0
+matplotlib>=3.8.3
+seaborn>=0.13.2
+
+#downloading datasets
+kaggle>=1.6.0
