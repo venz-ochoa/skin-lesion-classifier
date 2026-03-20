@@ -21,6 +21,7 @@ plt.figure(figsize=(10,6))
 sns.countplot(y='cell_type', data=df, order=df['cell_type'].value_counts().index, 
               hue='cell_type', palette='viridis', legend=False)
 plt.title('Distribution of Skin Lesion Types')
+#so image doesnt clip/overlap with other elements and borders
 plt.tight_layout()
 plt.savefig('/content/skin-lesion-classifier/EDA/class_distribution.png')
 plt.show()

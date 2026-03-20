@@ -3,6 +3,7 @@
 tensorflow>=2.16.1
 numpy>=1.26.4
 pandas>=2.2.0
+timm
 
 #image processing
 opencv-python-headless>=4.9.0
