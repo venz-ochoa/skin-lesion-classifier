@@ -1,3 +1,5 @@
+#exploratory data analysis
+#distribution and information about HAM10000
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -16,10 +18,18 @@ labels = {
 }
 df['cell_type'] = df['dx'].map(labels)
 
+#summary
+print("---- HAM10000 Summary ----")
+print(f"Total Images: {len(df)}")
+print("\nClass Counts:")
+print(df['cell_type'].value_counts())
+print("\nTop 5 Localization Sites:")
+print(df['localization'].value_counts().head(5))
+print("------------------------\n")
+
 # class distribution
 plt.figure(figsize=(10,6))
-sns.countplot(y='cell_type', data=df, order=df['cell_type'].value_counts().index, 
-              hue='cell_type', palette='viridis', legend=False)
+sns.countplot(y='cell_type', data=df, order=df['cell_type'].value_counts().index, hue='cell_type', palette='viridis', legend=False)
 plt.title('Distribution of Skin Lesion Types')
 #so image doesnt clip/overlap with other elements and borders
 plt.tight_layout()
