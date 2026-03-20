@@ -60,7 +60,7 @@ if os.path.exists(sample_path) and len(os.listdir(sample_path)) > 0:
         plt.title(f"Variation {i+1}")
 
     plt.tight_layout()
-    plt.savefig('/content/skin-lesion-classifier/data/sample_data_augmentation/augmentation_samples.png')
+    plt.savefig('/content/skin-lesion-classifier/EDA/augmentation_samples.png')
     print("Augmentation sample saved as 'augmentation_samples.png'")
 else:
     print("Error in generating sample image of data augmentation.")
