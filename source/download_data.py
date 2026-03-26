@@ -11,24 +11,35 @@ def dependencies():
     
 #to install dataset
 def datasets():
-    #create folders for dataset
-    #exist_ok = True will ignore the error if the directory already exists, if not itll create a directory
-    os.makedirs("data/ham10000", exist_ok = True)
+    os.makedirs("data/ham10000", exist_ok=True)
+    os.makedirs("data/isic2019", exist_ok=True)
     
     try:
-        #HAM10000
-        print("\nDownloading HAM10000 Dataset... ")
+        # HAM10000
+        print("\nDownloading HAM10000 Dataset...")
         if not os.listdir("data/ham10000"):
             subprocess.run([
                 "kaggle", "datasets", "download",
                 "-d", "kmader/skin-cancer-mnist-ham10000",
                 "-p", "data/ham10000",
                 "--unzip"
-            ], check = True)
+            ], check=True)
         print("Downloaded HAM10000 Successfully!")
-        
     except Exception as e:
-        print(f"Error : {e}")
+        print(f"Error: {e}")
+    try:
+        #ISIC 2019
+        print("\nDownloading ISIC 2019 Dataset...")
+        if not os.listdir("data/isic2019"):
+            subprocess.run([
+                "kaggle", "datasets", "download",
+                "-d", "andrewmvd/isic-2019",
+                "-p", "data/isic2019",
+                "--unzip"
+            ], check=True)
+        print("Downloaded ISIC 2019 Successfully!")
+    except Exception as e:
+        print(f"Error: {e}")
     #check=true is for python to stop the downloads the moment theres an error
     
 if __name__ == "__main__":
