@@ -16,7 +16,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # change this path if needed
 
-model_path = '/content/skin-lesion-classifier/models/efficientnetb4-v3/efficientnet_b4_v2_epoch_25.pth'
+model_path = '/content/skin-lesion-classifier/models/efficientnetb4-v3/efficientnet_b4_v3_epoch_25.pth'
 
 # initialize efficientnet-b4 architecture
 model = timm.create_model('efficientnet_b4', pretrained=False, num_classes=2)
