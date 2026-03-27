@@ -3,6 +3,8 @@ import os
 import shutil
 from sklearn.model_selection import train_test_split
 
+#HAM10000
+print("HAM10000 Benign and Malignant class counts:")
 metadata = '/content/skin-lesion-classifier/data/ham10000/HAM10000_metadata.csv'
 df = pd.read_csv(metadata)
 
@@ -75,3 +77,62 @@ sort(test_df, 'test')
 print(f"\nTrain size: {len(train_df)}")
 print(f"Validation size: {len(val_df)}")
 print(f"Test size: {len(test_df)}")
+
+# -----------------------------------------------
+
+#ISIC 2019
+#isic uses one-hot encoding, each class is its own column (MEL, BCC, AK are malignant)
+isic_metadata = '/content/skin-lesion-classifier/data/isic2019/ISIC_2019_Training_GroundTruth.csv'
+isic_df = pd.read_csv(isic_metadata)
+
+#this is the malignant classes for isic 2019
+isic_malignant = ['MEL', 'BCC', 'AK', 'SCC']
+
+#if any malignant column is 1, its malignant
+isic_df['binary_label'] = isic_df[isic_malignant].max(axis=1)
+
+#only keep malignant rows
+isic_malignant_df = isic_df[isic_df['binary_label'] == 1]
+
+#80% training and 20%(10 val, 10 test)
+isic_train_df, isic_temp_df = train_test_split(isic_malignant_df, test_size=0.2, random_state=42)
+isic_val_df, isic_test_df = train_test_split(isic_temp_df, test_size=0.50, random_state=42)
+
+#this is to check the class imbalance / count
+print("\nISIC 2019 Malignant class counts:")
+print(isic_malignant_df[isic_malignant].sum())
+
+#images are in a single folder unlike ham10000
+isic_source_folder = '/content/skin-lesion-classifier/data/isic2019/ISIC_2019_Training_Input/ISIC_2019_Training_Input'
+
+def sort_isic(df, split_name):
+    for index, row in df.iterrows():
+        img_name = row['image'] + '.jpg'
+        
+        #folder path
+        dest_folder = os.path.join(base_out, split_name, 'malignant')
+        #make if it doesnt exist
+        os.makedirs(dest_folder, exist_ok=True)
+        
+        #isic images are all in one folder
+        source = os.path.join(isic_source_folder, img_name)
+        destination = os.path.join(dest_folder, img_name)
+        
+        #create a copy and move it to the train folder
+        if os.path.exists(source):
+            shutil.copy(source, destination)
+        else:
+            print(f"Warning: Could not find {img_name} anywhere.")
+
+#process
+print("\nSorting ISIC 2019 train data...")
+sort_isic(isic_train_df, 'train')
+print("Sorting ISIC 2019 validation data...")
+sort_isic(isic_val_df, 'val')
+print("Sorting ISIC 2019 test data...")
+sort_isic(isic_test_df, 'test')
+
+#check the size of each set
+print(f"\nISIC Train size: {len(isic_train_df)}")
+print(f"ISIC Validation size: {len(isic_val_df)}")
+print(f"ISIC Test size: {len(isic_test_df)}")
