@@ -14,19 +14,15 @@
 3. Training Data & EDA
     - Dataset: HAM10000 (https://www.kaggle.com/datasets/kmader/skin-cancer-mnist-ham10000)
     - Dataset Size: 10,015 images
-    - Dataset: ISIC 2019 Challenge (https://www.kaggle.com/datasets/andrewmvd/isic-2019/data)
-    - Dataset Size: 25,331 images
     - Preprocessing Pipelines: 
         a. resizing to 224x224 (EfficientNet standards)
         b. normalization
-        c. data augmentation (Albumentations: GridDistortion, OpticalDistortion, GaussNoise)
-    - Dataset Class Balance: 80/20, class imbalanced addressed by WeightedRandomSampler and integration of malignant-only samples from ISIC 2019.
+        c. data augmentation (rotation, flips, and color jitters)
+    - Dataset Class Balance: 80/20, class imbalanced addressed by WeightedRandomSampler
 
 4. Model Performance Evaluation
     - Benchmark Epochs (Val F1, Val Acc, Val Loss)
-        a. Best F1 Score (Epoch 30): 0.9775
-        b. Lowest Val Loss (Epoch 29): 0.0949
-        c. Highest Accuracy (Epoch 30): 97.39%
-        d. Peak Recall (Epoch 26): 98.20%
-        e. Peak Precision (Epoch 13):98.20%
+        a. Epoch 20 (Best F1): 0.7689, 90.51%, 0.2705
+        b. Epoch 13 (Lowest Loss): 0.7406, 89.01%, 0.2590
+        c. Epoch 25 (Highest Accuracy): 0.7443, 91.01%, 0.3323
     
