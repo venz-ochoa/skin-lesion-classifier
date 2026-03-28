@@ -40,7 +40,7 @@ def datasets():
             subprocess.run(["kaggle", "datasets", "download", "-d", "andrewmvd/isic-2019", "-p", isic_path, "--unzip"], check=True)
             print("ISIC 2019 Downloaded.")
         else:
-            print("⏩ ISIC 2019 already exists.")
+            print("ISIC 2019 already exists.")
     except Exception as e:
         print(f"Error: {e}")
     input("\nPress Enter to return to menu...")
@@ -68,7 +68,7 @@ def run_pipeline():
             print(f"Error: Could not find {script_path}")
             break
     
-    print("\n✅ Data Pipeline processing complete.")
+    print("\nData Pipeline processing complete.")
     input("\nPress Enter to return to menu...")
 
 def run_script(script_name):
