@@ -5,7 +5,6 @@ import sys
 import os
 
 def clear_terminal():
-    # ASCII clear for a professional look
     sys.stdout.write("\033[H\033[J")
     sys.stdout.flush()
 
@@ -46,8 +45,33 @@ def datasets():
         print(f"Error: {e}")
     input("\nPress Enter to return to menu...")
 
+def run_pipeline():
+    """Combines classification and augmentation into one logical step"""
+    print("\n--- [3] Sorting & Augmenting Data ---")
+    pipeline_dir = os.path.join("src", "data_pipeline")
+    
+    scripts = [
+        ("classify_data.py", "Classifying and organizing images..."),
+        ("augment_data.py", "Generating balanced augmentation samples...")
+    ]
+
+    for script, message in scripts:
+        script_path = os.path.join(pipeline_dir, script)
+        if os.path.exists(script_path):
+            print(f"\n>> {message}")
+            try:
+                subprocess.run([sys.executable, script_path], check=True)
+            except Exception as e:
+                print(f"Error in {script}: {e}")
+                break
+        else:
+            print(f"Error: Could not find {script_path}")
+            break
+    
+    print("\n✅ Data Pipeline processing complete.")
+    input("\nPress Enter to return to menu...")
+
 def run_script(script_name):
-    # Standardizing pathing to find scripts in the src folder
     script_path = os.path.join("src", script_name)
     if os.path.exists(script_path):
         print(f"\n--- Launching {script_name} ---")
@@ -67,23 +91,26 @@ if __name__ == "__main__":
         print("========================================")
         print("  [1] Install Requirements")
         print("  [2] Install Datasets")
-        print("  [3] Run Evaluation (eval.py)")
-        print("  [4] Run Explainability Dashboard")
-        print("  [5] Exit")
+        print("  [3] Process Data (Classify & Augment)")
+        print("  [4] Run Evaluation (eval.py)")
+        print("  [5] Run Explainability Dashboard")
+        print("  [6] Exit")
         print("========================================")
         
         try:
-            select = input("\nEnter choice (1-5): ")
+            select = input("\nEnter choice (1-6): ")
             
             if select == "1":
                 dependencies()
             elif select == "2":
                 datasets()
             elif select == "3":
-                run_script("eval.py")
+                run_pipeline()
             elif select == "4":
-                run_script("explainability.py")
+                run_script("eval.py")
             elif select == "5":
+                run_script("explainability.py")
+            elif select == "6":
                 print("Exiting...")
                 break
             else:
