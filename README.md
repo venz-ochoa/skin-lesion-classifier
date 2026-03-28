@@ -22,4 +22,4 @@ To develop a binary classification model (benign vs malignant) with explainabili
 # Instructions
 1.  To download dependencies and datasets, run download_data.py. The user is given the option to download only dependencies, only datasets, or both. HAM10000 and ISIC 2019 uses Kaggle API to download datasets and will take approx. 7-15 minutes of downloading time.
 
-2. To run the Model GUI, run "makefile pipeline" or "python3 src/explainability.py"
+2. To run the Model GUI, run "make pipeline" or "python3 src/explainability.py"
