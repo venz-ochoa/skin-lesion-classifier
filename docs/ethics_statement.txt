@@ -8,3 +8,4 @@ Decision Policy & Safety
 Risk Arbitration: Unlike standard classifiers that use a fixed 0.5 threshold, this system uses a Contextual Bandit to optimize the decision boundary (λ) based on clinical context.
 Recall Priority: In "High Risk" contexts (determined by DistilBERT), the system prioritizes Recall (Sensitivity) over Precision, effectively acting as a "conservative" safety officer.
 Explainability: Grad-CAM saliency maps provide visual transparency, allowing clinicians to verify if the model is focusing on the lesion or background artifacts (e.g., hairs, gel).
+Disclaimer: The model is developed solely for academic purposes. It has not been validated for clinical diagnosis or treatment, and it should not be utilized as a substitute for professional medical advice. Deploying in real-world clinical settings without further rigorous validation and regulatory approval is not recommended.
