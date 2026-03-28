@@ -1,0 +1,12 @@
+To download the instructions, please run the following code:
+
+project-root/data/get_data.py
+This will download both the requirements and the dataset.
+
+This directory will the src_data, which holds the data for:
+/ham10000 - holds the images for ham10000 dataset
+/isic2019 - holds the images for isic2019 dataset
+/model_data - holds the combined images for ham10000 and isic2019
+    /test
+    /train
+    /val

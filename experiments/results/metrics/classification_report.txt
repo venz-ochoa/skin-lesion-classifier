@@ -1,0 +1,26 @@
+MODEL AUDIT REPORT: efficientnetb4_v2.pth
+========================================
+[ CORE PERFORMANCE ]
+Validation Loss : 0.1316
+Accuracy        : 96.56%
+F1 Score        : 0.9702
+Recall (Sens)   : 0.9658
+Precision       : 0.9746
+AU-ROC Score    : 0.9942
+Avg Precision   : 0.9959
+
+========================================
+	DETAILED CLASSIFICATION REPORT
+========================================
+              precision    recall  f1-score   support
+
+      Benign       0.95      0.97      0.96       806
+   Malignant       0.97      0.97      0.97      1111
+
+    accuracy                           0.97      1917
+   macro avg       0.96      0.97      0.96      1917
+weighted avg       0.97      0.97      0.97      1917
+
+========================================
+MC Dropout Mean Variance: 0.000552
+Sensitivity @ 10.0% FPR: 0.9865

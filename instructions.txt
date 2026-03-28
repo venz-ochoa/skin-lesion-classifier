@@ -1,0 +1,10 @@
+To run the data_pipeline.sh
+1. create a virtual environment (venv)
+    rm -rf venv .venv env
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install --upgrade pip
+
+2. use the following commands:
+    chmod +x src/data_pipeline.sh
+    ./src/data_pipeline.sh

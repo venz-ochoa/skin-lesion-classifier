@@ -1,0 +1,27 @@
+#put all dependencies here
+#deep learning
+torch>=2.2.0
+torchvision>=0.17.0
+timm>=0.9.16
+huggingface_hub
+joblib
+transformers
+
+#image processing
+albumentations>=1.4.0
+opencv-python-headless>=4.9.0
+Pillow>=10.2.0
+scipy>=1.12.0
+
+#data and math
+numpy>=1.26.4
+pandas>=2.2.0
+
+#evaluation and visualization
+scikit-learn>=1.4.0
+matplotlib>=3.8.3
+seaborn>=0.13.2
+torchvision
+
+#downloading datasets
+kaggle>=1.6.0

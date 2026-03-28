@@ -1,0 +1,26 @@
+TEST DATASET AUDIT REPORT: efficientnetb4_v2.pth
+========================================
+[ CORE PERFORMANCE - TEST SET ]
+Test Loss       : 0.1207
+Accuracy        : 96.62%
+F1 Score        : 0.9707
+Recall (Sens)   : 0.9642
+Precision       : 0.9773
+AU-ROC Score    : 0.9946
+Avg Precision   : 0.9963
+
+========================================
+	DETAILED CLASSIFICATION REPORT
+========================================
+              precision    recall  f1-score   support
+
+      Benign       0.95      0.97      0.96       806
+   Malignant       0.98      0.96      0.97      1118
+
+    accuracy                           0.97      1924
+   macro avg       0.96      0.97      0.97      1924
+weighted avg       0.97      0.97      0.97      1924
+
+========================================
+MC Dropout Mean Variance: 0.000550
+Sensitivity @ 10.0% FPR: 0.9893
