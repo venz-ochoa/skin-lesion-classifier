@@ -138,6 +138,7 @@ def run_master_audit():
 
     #mc dropout
     print("\nMC Dropout Analysis (10 samples)...")
+    print("This may take a moment...")
     model.train()
     for m in model.modules():
         if isinstance(m, nn.BatchNorm2d):

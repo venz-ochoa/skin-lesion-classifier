@@ -22,5 +22,5 @@ Avg Precision   : 0.9963
 weighted avg       0.97      0.97      0.97      1924
 
 ========================================
-MC Dropout Mean Variance: 0.000550
+MC Dropout Mean Variance: 0.000660
 Sensitivity @ 10.0% FPR: 0.9893

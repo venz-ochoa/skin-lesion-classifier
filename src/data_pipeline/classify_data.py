@@ -30,6 +30,7 @@ print(df['binary_label'].value_counts())
 #images
 source_folder = 'data/src_data/ham10000'
 base_out = 'data/model_data/'
+os.makedirs(base_out, exist_ok=True)
 
 def sort(df, split_name):
     for index, row in df.iterrows():
