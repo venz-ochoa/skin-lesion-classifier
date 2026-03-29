@@ -83,7 +83,7 @@ def run_pipeline():
 
 def run_pipeline():
     """Combines classification and augmentation into one logical step"""
-    print("\n--- [3] Sorting & Augmenting Data ---")
+    print("\n--- Sorting & Augmenting Data ---")
     pipeline_dir = os.path.join("src", "data_pipeline")
     
     scripts = [

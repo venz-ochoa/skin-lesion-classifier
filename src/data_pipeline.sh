@@ -14,6 +14,6 @@ else
 fi
 clear
 
-echo "Step 1: Running Data Setup..."
+echo "Running Data Setup..."
 python3 data/get_data.py
 clear
