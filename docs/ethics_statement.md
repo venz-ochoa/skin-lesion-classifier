@@ -1,11 +1,14 @@
 Ethical Considerations: Skin Tone Bias
 The Challenge: The primary training dataset (HAM10000) lacks diversity, with a significant skew toward lighter skin tones (Fitzpatrick Scale I-III).
 Potential Risk: The model may exhibit lower accuracy or higher false-negative rates for patients with darker skin tones (Fitzpatrick IV-VI) due to a lack of representative features (e.g., different visual appearances of melanoma on darker skin).
+
 Mitigation Strategies:
 Multi-Modal Redundancy: The NLP and RL components act as "safety nets." If a patient has high-risk clinical symptoms (NLP), the RL policy automatically lowers the threshold, reducing the chance of a miss even if the Vision model (CNN) is less confident due to skin tone variations.
 Future Work: Integration of the Diverse Dermatology Dataset (DDD) is prioritized to balance the training distribution.
+
 Decision Policy & Safety
 Risk Arbitration: Unlike standard classifiers that use a fixed 0.5 threshold, this system uses a Contextual Bandit to optimize the decision boundary (λ) based on clinical context.
 Recall Priority: In "High Risk" contexts (determined by DistilBERT), the system prioritizes Recall (Sensitivity) over Precision, effectively acting as a "conservative" safety officer.
 Explainability: Grad-CAM saliency maps provide visual transparency, allowing clinicians to verify if the model is focusing on the lesion or background artifacts (e.g., hairs, gel).
+
 Disclaimer: The model is developed solely for academic purposes. It has not been validated for clinical diagnosis or treatment, and it should not be utilized as a substitute for professional medical advice. Deploying in real-world clinical settings without further rigorous validation and regulatory approval is not recommended.
