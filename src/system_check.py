@@ -38,21 +38,35 @@ def check_models():
     
     all_ok = True
     for name, rel_path in models.items():
+        # Combine base directory with relative model path for absolute lookup
         full_path = os.path.join(base_dir, rel_path)
         if not os.path.exists(full_path):
-            print(f"{name.ljust(12)} NOT FOUND at {rel_path}")
-            all_ok = False
-        else:
-            size_mb = os.path.getsize(full_path) / (1024 * 1024)
-            # Threshold for Vision model is 10MB (real one is ~71MB)
-            if "Vision" in name and size_mb < 1.0:
-                print(f"{name.ljust(12)} Detected LFS POINTER or INVALID FILE ({size_mb*1024:.1f} KB).")
-                all_ok = False
-            elif "RL Policy" in name and size_mb < 0.001:
-                print(f"{name.ljust(12)} Found but EMPTY (0 bytes). Needs training.")
-                all_ok = False
+            # Fallback check for models at root: In case models are stored at root 'models/' instead of 'src/model/'
+            alt_path = os.path.join(base_dir, rel_path.replace("src/model/", "models/"))
+            if os.path.exists(alt_path):
+                full_path = alt_path
             else:
-                print(f"{name.ljust(12)} Found ({size_mb:.2f} MB)")
+                print(f"{name.ljust(12)} NOT FOUND at {rel_path}")
+                all_ok = False
+                continue
+
+        # Convert file size to MB for human-readable reporting
+        size_mb = os.path.getsize(full_path) / (1024 * 1024)
+        
+        # Validation Logic:
+        # Vision (B4): Real weights are ~71MB. If < 1.0MB, it's likely a Git LFS pointer file, not the actual binary.
+        if "Vision" in name and size_mb < 1.0:
+            print(f"{name.ljust(12)} Detected LFS POINTER or INVALID FILE ({size_mb*1024:.1f} KB).")
+            all_ok = False
+        # RL Policy: If 0 bytes, the agent has been initialized but not yet trained (optimized).
+        elif "RL Policy" in name and size_mb < 0.001:
+            print(f"{name.ljust(12)} Found but EMPTY (0 bytes). Needs training.")
+            all_ok = False
+        # NLP Models: Clinical registry files (TF-IDF/Vectorizers) are naturally very small (KBs).
+        elif "NLP" in name:
+            print(f"{name.ljust(12)} Found (Clinical Registry Active)")
+        else:
+            print(f"{name.ljust(12)} Found ({size_mb:.2f} MB)")
     return all_ok
 
 if __name__ == "__main__":
