@@ -66,7 +66,7 @@ All data currently utilized originates from publicly available, de-identified da
 * Zero-Collection Policy: The current system collects no additional identifiable user data.
 * Regulatory Compliance: Future real-world implementations must guarantee explicit patient consent, secure encrypted storage, and strict adherence to data protection regulations (e.g., HIPAA, GDPR, or local equivalents).
 
-### Misuse Prevention
+### 11. Misuse Prevention
 * To minimize the potential for harmful application, developers and researchers sharing this repository share a collective responsibility:
 * Explicit Disclaimers: All documentation must clearly state the system's non-clinical purpose.
 * Usage Warnings: Repository guidelines explicitly forbid real-world medical application without appropriate medical licensing and regulatory clearance.
