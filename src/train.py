@@ -91,7 +91,8 @@ def train():
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=3)
 
     # training loop
-    num_epochs = 30
+    # changed to 20 so runtime is less than 90. 
+    num_epochs = 20
     print(f"Starting Training with Combined Dataset for {num_epochs} Epochs...")
 
     for epoch in range(num_epochs):
