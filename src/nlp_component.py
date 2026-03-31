@@ -16,13 +16,14 @@ except ImportError:
     TRANSFORMERS_AVAILABLE = False
     print("[WARNING] Transformers not found. Falling back to TF-IDF.")
 
-# --- Elite Entity Dictionary (Recalibrated for Safety) ---
+# Dynamic weighting for symptoms (higher value = higher risk contribution)
 SYMPTOM_ENTITIES = {
     'bleed': 0.25, 'itch': 0.12, 'growth': 0.20, 'change': 0.15, 
     'pain': 0.10, 'firm': 0.10, 'elevated': 0.10, 'crust': 0.10,
     'rapid': 0.25, 'irregular': 0.20, 'color': 0.10, 'dark': 0.18,
     'asymmetry': 0.20, 'border': 0.15, 'multicolored': 0.18, 'large': 0.10
 }
+# Risk factors based on patient history
 RISK_ENTITIES = {
     'melanoma': 0.35, 'sun exposure': 0.12, 'history': 0.20, 
     'dysplastic': 0.20, 'atypical': 0.20, 'genetic': 0.10
@@ -47,7 +48,8 @@ class SkinLesionNLPApp:
         self.root.rowconfigure(0, weight=1)
         
         self.base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        self.model_dir = os.path.join(self.base_dir, 'models', 'nlp')
+        # Align NLP local data storage with the main model repository
+        self.model_dir = os.path.join(self.base_dir, 'src', 'model', 'nlp')
         os.makedirs(self.model_dir, exist_ok=True)
         
         self.nlp_pipeline = None; self.setup_ui(); self.init_system()
