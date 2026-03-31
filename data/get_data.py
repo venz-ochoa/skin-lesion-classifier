@@ -94,7 +94,7 @@ def run_pipeline():
     for script, message in scripts:
         script_path = os.path.join(pipeline_dir, script)
         if os.path.exists(script_path):
-            print(f"\n>> {message}")
+            print(f"\n{message}")
             try:
                 subprocess.run([sys.executable, script_path], check=True)
             except Exception as e:
