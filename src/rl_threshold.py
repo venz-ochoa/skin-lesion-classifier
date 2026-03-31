@@ -19,9 +19,11 @@ class LinearBanditAgent:
         self.alpha = 0.4 
         
     def get_features(self, age, sex, nlp_score, site_risk):
+        """Processes clinical patient data into numerical feature vectors."""
         f_age = min(1.0, age / 100.0)
         f_sex = 1.0 if sex == "female" else 0.0
         f_site = site_risk
+        # Current Patient Vector: [normalized_age, binary_sex, nlp_clinical_score, location_risk, bias_term]
         return np.array([f_age, f_sex, nlp_score, f_site, 1.0])
 
     def select_action(self, x):
@@ -176,8 +178,9 @@ class EliteThresholdApp:
         self.res_text.insert("end", f"  SAFE (λ={final_l:.2f}) -> CAUTION (λ={final_h:.2f})\n")
         self.res_text.insert("end", f"  ADAPTIVE SENSITIVITY:  +{((final_l-final_h)/final_l)*100:.1f}%\n")
 
-        os.makedirs(os.path.join(self.base_dir, "models", "rl"), exist_ok=True)
-        joblib.dump(self.agent, os.path.join(self.base_dir, "models", "rl", "threshold_agent.joblib"))
+        # Unified Model Storage: Ensure the RL agent is saved in the central src/model repository
+        os.makedirs(os.path.join(self.base_dir, "src", "model", "rl"), exist_ok=True)
+        joblib.dump(self.agent, os.path.join(self.base_dir, "src", "model", "rl", "threshold_agent.joblib"))
         
         self.train_btn.config(state="normal", text="RETRAIN PERSONALIZED POLICY")
         self.is_training = False
@@ -192,7 +195,7 @@ def get_rl_threshold(cnn_prob, clinical_text, age=50, sex="male", site="unknown"
         from .nlp_component import get_risk_score
     nlp_score = get_risk_score(clinical_text)
     
-    agent_path = os.path.join(base_dir, "models", "rl", "threshold_agent.joblib")
+    agent_path = os.path.join(base_dir, "src", "model", "rl", "threshold_agent.joblib")
     threshold_options = np.round(np.arange(0.1, 0.85, 0.05), 2)
     
     if os.path.exists(agent_path):
