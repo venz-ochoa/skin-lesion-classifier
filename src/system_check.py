@@ -30,10 +30,10 @@ def check_models():
     print("\n--- 🧠 Model Integrity Check ---")
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     models = {
-        "Vision (B4)": "models/efficientnetb4-v2/efficientnet_b4_v3_epoch_15.pth",
-        "NLP Model": "models/nlp/nlp_model.joblib",
-        "NLP Vector": "models/nlp/vectorizer.joblib",
-        "RL Policy": "models/rl/threshold_agent.joblib"
+        "Vision (B4)": "src/model/efficientnetb4_v2.pth",
+        "NLP Model": "src/model/nlp/nlp_model.joblib",
+        "NLP Vector": "src/model/nlp/vectorizer.joblib",
+        "RL Policy": "src/model/rl/threshold_agent.joblib"
     }
     
     all_ok = True
@@ -44,9 +44,12 @@ def check_models():
             all_ok = False
         else:
             size_mb = os.path.getsize(full_path) / (1024 * 1024)
-            # Threshold for Vision model is 10MB (real one is ~710MB)
-            if "Vision" in name and size_mb < 0.01:
-                print(f"{name.ljust(12)} Detected LFS POINTER ({size_mb*1024:.1f} KB). Safe Mode will trigger.")
+            # Threshold for Vision model is 10MB (real one is ~71MB)
+            if "Vision" in name and size_mb < 1.0:
+                print(f"{name.ljust(12)} Detected LFS POINTER or INVALID FILE ({size_mb*1024:.1f} KB).")
+                all_ok = False
+            elif "RL Policy" in name and size_mb < 0.001:
+                print(f"{name.ljust(12)} Found but EMPTY (0 bytes). Needs training.")
                 all_ok = False
             else:
                 print(f"{name.ljust(12)} Found ({size_mb:.2f} MB)")
@@ -62,5 +65,7 @@ if __name__ == "__main__":
     elif not deps:
         print("\nFIX: Run 'pip install -r requirements.txt' to install missing packages.")
     elif not mods:
-        print("\nFIX: Download the full weight binaries into the 'models/' folders.")
-        print("     (The Vision weight must be ~710MB, not 133 bytes).")
+        print("\nFIX: The system is missing or has invalid model weight binaries.")
+        print("     1. Ensure 'src/model/efficientnetb4_v2.pth' exists (~71MB).")
+        print("     2. Ensure NLP models are present in 'src/model/nlp/'.")
+        print("     3. For RL Policy, run 'python src/rl_threshold.py' and click 'OPTIMIZE' to generate the agent.")
